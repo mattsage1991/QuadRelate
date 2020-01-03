@@ -1,24 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using QuadRelate.Contracts;
 using QuadRelate.Models;
 using QuadRelate.Types;
 
 namespace QuadRelate.Players.Vince
 {
-    public class CpuPlayerVince : IPlayer
+    public class CpuPlayerVince : CpuPlayerBase
     {
-        private readonly IRandomizer _randomizer;
         private const int _centreColumn = 3;
 
-        public string Name => "Invincible";
+        public override string Name => "Invincible";
 
-        public CpuPlayerVince(IRandomizer randomizer)
+        public CpuPlayerVince(PlayerInitializer initializer) : base(initializer)
         {
-            _randomizer = randomizer;
         }
 
-        public int NextMove(Board board, Counter colour)
+        public override int NextMove(Board board, Counter colour)
         {
             var availableMoves = board.AvailableColumns();
 
@@ -95,7 +92,7 @@ namespace QuadRelate.Players.Vince
             return GetMoveClosestToCentre(bestMoves);
         }
 
-        public void GameOver(GameResult result)
+        public override void GameOver(GameResult result)
         {
             //if (result.Winner == _currentColour.Invert())
             //{
@@ -119,7 +116,7 @@ namespace QuadRelate.Players.Vince
                     return move;
             }
 
-            return moves[_randomizer.Next(moves.Count)];
+            return Initializer.Randomizer.GetRandomItem(moves);
         }
     } 
 }

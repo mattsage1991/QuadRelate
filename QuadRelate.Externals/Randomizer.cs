@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using QuadRelate.Contracts;
 
 namespace QuadRelate.Externals
@@ -15,6 +16,11 @@ namespace QuadRelate.Externals
         public int Next(int maxValue)
         {
             return _random.Next(maxValue);
+        }
+
+        public int GetRandomItem(IList<int> items)
+        {
+            return items[Next(items.Count)];
         }
     }
 }

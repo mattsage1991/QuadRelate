@@ -1,30 +1,19 @@
-﻿using QuadRelate.Contracts;
-using QuadRelate.Models;
+﻿using QuadRelate.Models;
 using QuadRelate.Types;
 
 namespace QuadRelate.Players.Rory
 {
-    public class CpuPlayerRandom : IPlayer
+    public class CpuPlayerRandom : CpuPlayerBase
     {
-        private readonly IRandomizer _randomizer;
-
-        public CpuPlayerRandom(IRandomizer randomizer)
+        public CpuPlayerRandom(PlayerInitializer initializer) : base(initializer)
         {
-            _randomizer = randomizer;
         }
 
-        public string Name => "The Randomizer";
+        public override string Name => "The Randomizer";
 
-        public int NextMove(Board board, Counter colour)
+        public override int NextMove(Board board, Counter colour)
         {
-            var index = _randomizer.Next(board.AvailableColumns().Count);
-
-            return board.AvailableColumns()[index];
-        }
-
-        public void GameOver(GameResult result)
-        {
-            // Ignore.
+            return Initializer.Randomizer.GetRandomItem(board.AvailableColumns());
         }
     }
 }

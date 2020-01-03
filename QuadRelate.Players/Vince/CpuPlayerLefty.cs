@@ -1,21 +1,19 @@
-﻿using QuadRelate.Contracts;
-using QuadRelate.Models;
+﻿using QuadRelate.Models;
 using QuadRelate.Types;
 
 namespace QuadRelate.Players.Vince
 {
-    public class CpuPlayerLefty : IPlayer
+    public class CpuPlayerLefty : CpuPlayerBase
     {
-        public string Name => "Lefty";
-
-        public int NextMove(Board board, Counter colour)
+        public CpuPlayerLefty(PlayerInitializer initializer) : base(initializer)
         {
-            return board.AvailableColumns()[0];
         }
 
-        public void GameOver(GameResult result)
+        public override string Name => "Lefty";
+
+        public override int NextMove(Board board, Counter colour)
         {
-            // Ignore.
+            return board.AvailableColumns()[0];
         }
     }
 }

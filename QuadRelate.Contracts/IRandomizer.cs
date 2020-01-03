@@ -1,4 +1,6 @@
-﻿namespace QuadRelate.Contracts
+﻿using System.Collections.Generic;
+
+namespace QuadRelate.Contracts
 {
     public interface IRandomizer
     {
@@ -8,5 +10,7 @@
         /// <param name="maxValue">The exclusive upper bound of the random number to be generated.</param>
         /// <returns>A 32-bit signed integer that is greater than or equal to 0, and less than maxValue</returns>
         int Next(int maxValue);
+
+        int GetRandomItem(IList<int> items);
     }
 }

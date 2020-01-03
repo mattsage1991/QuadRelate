@@ -1,14 +1,17 @@
-﻿using QuadRelate.Contracts;
-using QuadRelate.Models;
+﻿using QuadRelate.Models;
 using QuadRelate.Types;
 
 namespace QuadRelate.Players.Rory
 {
-    public class CpuPlayer01 : IPlayer
+    public class CpuPlayer01 : CpuPlayerBase
     {
-        public string Name => "Easy Swags";
+        public CpuPlayer01(PlayerInitializer initializer) : base(initializer)
+        {
+        }
+        
+        public override string Name => "Easy Swags";
 
-        public int NextMove(Board board, Counter colour)
+        public override int NextMove(Board board, Counter colour)
         {
             // Play only move available
             if (board.AvailableColumns().Count == 1)
@@ -62,11 +65,6 @@ namespace QuadRelate.Players.Rory
             }
 
             return board.AvailableColumns()[0];
-        }
-
-        public void GameOver(GameResult result)
-        {
-            // Ignore.
         }
     }
 }

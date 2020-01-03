@@ -1,19 +1,22 @@
-﻿using QuadRelate.Contracts;
-using QuadRelate.Models;
+﻿using QuadRelate.Models;
 using QuadRelate.Types;
 using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace QuadRelate.Players.Rory
 {
-    public class CpuPlayer02 : IPlayer
+    public class CpuPlayer02 : CpuPlayerBase
     {
         private Counter _currentColour;
         private const int _middleColumn = 3;
 
-        public string Name => "Not So Fast Swaggy";
+        public CpuPlayer02(PlayerInitializer initializer) : base(initializer)
+        {
+        }
+        
+        public override string Name => "Not So Fast Swaggy";
 
-        public int NextMove(Board board, Counter colour)
+        public override int NextMove(Board board, Counter colour)
         {
             _currentColour = colour;
             var availableColumns = board.AvailableColumns();
@@ -97,7 +100,7 @@ namespace QuadRelate.Players.Rory
             return availableColumns[0];
         }
 
-        public void GameOver(GameResult result)
+        public override void GameOver(GameResult result)
         {
             if (result.Winner == _currentColour.Invert())
             {
